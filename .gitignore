@@ -45,5 +45,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# COnfig Files
-/server/config/dev.js
+# Config Files
+./server/config/dev.js
