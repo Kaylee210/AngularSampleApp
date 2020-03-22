@@ -17,29 +17,49 @@
                                   <i class="fa fa-twitter"></i>
                               </a>
                           </div>
-                          <form class="register-form">
+                          <form class="register-form" #registerForm="ngForm" (ngSubmit) = "register(registerForm)">
                               <label>Email</label>
-                              <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus===true}">
+                              <div class="input-group form-group-no-border">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">
                                       <i class="nc-icon nc-email-85"></i>
                                   </span>
                                 </div>
 
-                                  <input type="text" class="form-control" placeholder="Email" (focus)="focus=true" (blur)="focus=false" >
+                                  <input ngModel name = "email" type="email" class="form-control" placeholder="Email" pattern ="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required>
+                              </div>
+
+                              <label>User name</label>
+                              <div class="input-group form-group-no-border">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                      <i class="nc-icon nc-single-02"></i>
+                                  </span>
+                                </div>
+
+                                  <input ngModel name = "username" type="text" class="form-control" placeholder="User name"  required>
                               </div>
 
                               <label>Password</label>
-                              <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus1===true}">
+                              <div class="input-group form-group-no-border">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">
                                       <i class="nc-icon nc-key-25"></i>
                                   </span>
                                 </div>
-                                  <input type="text" class="form-control" placeholder="Password" (focus)="focus1=true" (blur)="focus1=false" >
+                                  <input ngModel name = "password" type="password" class="form-control" placeholder="Password" required>
                               </div>
-                              <button class="btn btn-danger btn-block btn-round">Register</button>
+
+                              <label>Password(Comfirm)</label>
+                              <div class="input-group form-group-no-border">
+                                  <input ngModel name = "comfirmPassword" type="password" class="form-control" placeholder="Password(Comfirm)" required>
+                              </div>
+                              <button [disabled]="!registerForm.valid" class="btn btn-danger btn-block btn-round" type = "submit">Register</button>
                           </form>
+                            <br />
+                            <div *ngIf = "errors && errors.length > 0" class = "alert alert-danger">
+                                <p *ngFor = "let error of errors">{{error.detail}}</p>
+                            </div>
                           <div class="forgot">
                               <a [routerLink]="['/login']"  class="btn btn-link btn-danger">LOG IN</a>
                           </div>
